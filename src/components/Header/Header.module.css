@@ -1,0 +1,16 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.header-box {
+    display: flex;
+    max-width: 455px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.link {
+    font-family: "Montserrat Alternates", sans-serif;
+    text-decoration: none;
+}
