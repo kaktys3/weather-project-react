@@ -1,16 +1,41 @@
 .header {
     display: flex;
+    align-items: center;
     justify-content: space-between;
+    padding: 12px 150px;
 }
 
 .header-box {
     display: flex;
-    max-width: 455px;
+    width: 455px;
     justify-content: space-between;
     align-items: center;
 }
 
 .link {
-    font-family: "Montserrat Alternates", sans-serif;
     text-decoration: none;
+    color: #000;
+    font-weight: 500;
+    font-size: 12px;
+}
+
+.login {
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-weight: 600;
+    font-size: 12px;
+    color: #000;
+    border: 0px;
+    background-color: #FFB36C;
+}
+
+.header-link-box {
+    display: flex;
+    gap: 49px;
+}
+
+.user-box {
+    display: flex;
+    align-items: center;
+    gap: 27px;
 }

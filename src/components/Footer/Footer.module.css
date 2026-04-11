@@ -1,0 +1,30 @@
+.button {
+    border: 0px;
+    background: rgba(0, 0, 0, 0);
+}
+
+.footer {
+    display: flex;
+    align-items: center;
+    background: #ffb36c;
+    padding: 40px 150px 64px;
+    gap: 103px;
+}
+
+.title {
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.text {
+    font-weight: 500;
+    font-size: 12px;
+    width: 92px;
+    padding: 10px 0px 0px;
+}
+
+.socials {
+    display: flex;
+    gap: 20px;
+    padding: 10px 0px 0px;
+}
