@@ -7,8 +7,8 @@ import { WeatherContect } from '../Context/WeatherContext.jsx'
 export default function Hero() {
     const [searchCity, setSearchCity] = useState('')
     const { setNewCity, nowWeather } = useContext(WeatherContect)
-
-    const blockSubmit = nowWeather.filter(e => e.name === searchCity)
+    const blockSubmit = nowWeather.filter(e => e.name === searchCity.charAt(0).toUpperCase() + searchCity.slice(1))
+    
     const hundelSubmit = (e) => {
         e.preventDefault()
 

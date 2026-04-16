@@ -9,7 +9,6 @@
 }
 
 .weather {
-    padding: 60px 150px 80px;
     display: flex;
     justify-content: center;
     gap: 90px;

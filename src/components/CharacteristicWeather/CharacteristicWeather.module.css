@@ -1,0 +1,32 @@
+p {
+    font-weight: 500;
+    font-size: 16px;
+}
+
+h3 {
+    font-weight: 500;
+    font-size: 32px;
+}
+
+.sectionWeatherCharacteristic>div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    width: 290px;
+    height: 217px;
+    background: #d9d9d9;
+}
+
+.sectionWeatherCharacteristic {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    border-radius: 20px;
+    width: 1140px;
+    height: 554px;
+    background: #e8e8e8;
+    column-gap: 58px;
+}

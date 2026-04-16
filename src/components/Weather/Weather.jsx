@@ -7,10 +7,11 @@ import { FaRegHeart } from "react-icons/fa";
 import { MdDeleteOutline } from "react-icons/md";
 
 const WeatherCard = ({ place, country, time, data, dataDay, temperature, img, }) => {
-    const { setDelet } = useContext(WeatherContect)
+    const { setDelet, setStatistic } = useContext(WeatherContect)
 
     const delet = () => {
         setDelet(place)
+        setStatistic('')
     }
 
     return (
@@ -34,7 +35,7 @@ const WeatherCard = ({ place, country, time, data, dataDay, temperature, img, })
                         <button className={wh.like}><FaRegHeart className={wh['like-icon']} /></button>
                     </div>
                     <div className={wh['left-consol-box']}>
-                        <button className={wh.statistick}>See more</button>
+                        <button className={wh.statistick} onClick={() => setStatistic(place)}>See more</button>
                         <button className={wh.delet} onClick={() => delet()}><MdDeleteOutline className={wh['delet-icon']} /></button>
                     </div>
                 </div>
@@ -45,14 +46,21 @@ const WeatherCard = ({ place, country, time, data, dataDay, temperature, img, })
 
 export default function Weather() {
     const [nowTime, setTime] = useState(new Date())
-    const { nowWeather } = useContext(WeatherContect)
+    const { nowWeather} = useContext(WeatherContect)
     const days = ["Неділя", "Понеділок", "Вівторок", "Середа", "Четвер", "П'ятниця", "Субота"];
+    const fixTime = () => {
+        if(nowTime.getMinutes() < 10) {
+            return 0
+        } else {
+            return 
+        }
+    }
 
     return (
         <>
             <section className={wh.weather}>
-                {nowWeather && nowWeather.map((weather) => (
-                    <WeatherCard place={weather.name} country={weather.sys.country} time={`${nowTime.getHours()}:${nowTime.getMinutes()}`} data={`${nowTime.getDate()}.${nowTime.getMonth()}.${nowTime.getFullYear()}`} dataDay={days[nowTime.getDay()]} temperature={`${weather.main.temp}℃`} img={Sun} key={weather.id} />
+                {nowWeather && nowWeather.map((weather, index) => (
+                    <WeatherCard place={weather.name} country={weather.country} time={`${nowTime.getHours()}:${fixTime(), nowTime.getMinutes()}`} data={`${nowTime.getDate()}.${nowTime.getMonth()}.${nowTime.getFullYear()}`} dataDay={days[nowTime.getDay()]} temperature={`${weather.current.apparent_temperature}℃`} img={Sun} key={index} />
                 ))}
             </section>
         </>

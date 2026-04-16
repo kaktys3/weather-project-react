@@ -1,0 +1,45 @@
+.dayDate,
+.dayTemp {
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.weekSection > div {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.weekSection {
+    display: flex;
+    justify-content: center;
+    background: #e8e8e8;
+    width: 1140px;
+    padding: 26px 0px 42px;
+    border-radius: 20px;
+}
+
+.weekTitle {
+    padding: 0px 0px 10px;
+}
+
+.dayCard {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 10px;
+    width: 886px;
+    padding: 0px 50px;
+    height: 47px;
+    background: #d9d9d9;
+}
+
+.dayStatus {
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.dayInfo {
+    display: flex;
+    align-items: center;
+}
