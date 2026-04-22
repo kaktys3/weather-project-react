@@ -4,7 +4,8 @@ import { WeatherContect } from '../Context/WeatherContext.jsx'
 
 export default function SignUp() {
     const [isHiden, setHiden] = useState(false)
-    const [userData, setUserData] = useState({ name: '', email: '', password: ''})
+    const [loginPage, setLoginPage] = useState(false)
+    const [userData, setUserData] = useState({ name: '', email: '', password: '' })
     const { isModal, setModal, isLogin, setLogin } = useContext(WeatherContect)
 
     useEffect(() => {
@@ -20,6 +21,12 @@ export default function SignUp() {
         }))
     }
 
+    const loginPageFn = (e) => {
+        e.preventDefault()
+
+        setLoginPage(!loginPage)
+    }
+
     const handelSubmit = (e) => {
         e.preventDefault()
 
@@ -32,7 +39,7 @@ export default function SignUp() {
         <>
             {isHiden && <div className={lg['back-drop']} onClick={() => setModal(false)}></div>}
             {isHiden && <div className={lg.container}>
-                <h3 className={lg.title}>Sign up</h3>
+                <h3 className={lg.title}>{loginPage ? 'Log in' : 'Sign up'}</h3>
 
                 <form className={lg.form} action="" onSubmit={handelSubmit}>
                     <label className={lg.label}>
@@ -54,7 +61,7 @@ export default function SignUp() {
                 </form>
 
                 <p className={lg.footerText}>
-                    Already have an account? <a className={lg.link} href="">Log In</a>
+                    Already have an account? <a onClick={(e) => loginPageFn(e)} className={lg.link} href="">{loginPage ? 'Sign up' : 'Log in'}</a>
                 </p>
             </div>
             }

@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import wh from './Weather.module.css'
 import { WeatherContect } from '../Context/WeatherContext'
 import Sun from '/src/img/Sun.png'
@@ -9,7 +9,7 @@ import { DateTime } from "luxon";
 
 
 const WeatherCard = ({ place, country, time, data, dataDay, temperature, img, }) => {
-    const { setDelet, setDayStatistic, setWeekStatistic } = useContext(WeatherContect)
+    const { setDelet, setDayStatistic, setWeekStatistic, setModal, isLogin} = useContext(WeatherContect)
     const [isLike, setLike] = useState(false)
 
     const delet = () => {
@@ -37,8 +37,8 @@ const WeatherCard = ({ place, country, time, data, dataDay, temperature, img, })
                 </div>
                 <h3 className={wh.time}>{time}</h3>
                 <div className={wh['statistick-consol-box']}>
-                    <button className={wh['hour-weather']} onClick={() => setDayStatistic(place)}>Day forecast</button>
-                    <button className={wh['week-weather']} onClick={() => setWeekStatistic(place)}>Weekly forecast</button>
+                    <button className={wh['hour-weather']} onClick={() => isLogin ? setDayStatistic(place) : setModal(true)}>Day forecast</button>
+                    <button className={wh['week-weather']} onClick={() => isLogin ? setWeekStatistic(place) : setModal(true)}>Weekly forecast</button>
                 </div>
                 <p className={wh.data}>{data} | {dataDay}</p>
                 <img src={img} alt="" />
@@ -49,7 +49,7 @@ const WeatherCard = ({ place, country, time, data, dataDay, temperature, img, })
                         <button className={wh.like} onClick={() => setLike(!isLike)}><FaHeart style={isLike ? { fill: 'red' } : {}} className={wh['like-icon']} /></button>
                     </div>
                     <div className={wh['left-consol-box']}>
-                        <button className={wh.statistick} onClick={() => allStatistic()}>See more</button>
+                        <button className={wh.statistick} onClick={() => isLogin ? allStatistic() : setModal(true)}>See more</button>
                         <button className={wh.delet} onClick={() => delet()}><MdDeleteOutline className={wh['delet-icon']} /></button>
                     </div>
                 </div>
@@ -62,34 +62,25 @@ export default function Weather() {
     const [nowTime, setTime] = useState(new Date())
     const { nowWeather, dayWeather } = useContext(WeatherContect)
     const days = ["Неділя", "Понеділок", "Вівторок", "Середа", "Четвер", "П'ятниця", "Субота"];
-    
+
 
     return (
         <>
             <section className={wh.weather}>
                 {nowWeather && nowWeather.map((weather, index) => {
+                    useEffect(() => {
+                        const timer = setInterval(() => {
+                            setTime(new Date())
+                        }, 60000)
+
+                        return () => clearInterval(timer)
+                    }, [])
                     const dt = DateTime.now().setZone(`${dayWeather[index].timezone}`)
-                   const timeHourFix = () => {
-                    if(dt.hour < 10) {
-                        return `0${dt.hour}`
-                    } else {
-                        return dt.hour
-                    }
-                   }
 
-                   const timeMinutFix = () => {
-                    if(dt.minute < 10) {
-                        return `0${dt.minute}`
-                    } else {
-                        return dt.minute
-                    }
-                   }
-
-                    
                     return (<WeatherCard
                         place={weather.name}
                         country={weather.country}
-                        time={`${timeHourFix()}:${timeMinutFix()}`}
+                        time={dt.toFormat('HH:mm')}
                         data={`${nowTime.getDate()}.${nowTime.getMonth()}.${nowTime.getFullYear()}`}
                         dataDay={days[nowTime.getDay()]}
                         temperature={`${weather.current.apparent_temperature}℃`}

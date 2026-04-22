@@ -62,7 +62,6 @@ export default function WeatherProvider({ children }) {
         localStorage.setItem('weekWeather', JSON.stringify(weekWeather))
     }, [nowWeather, dayWeather, weekWeather])
 
-    console.log(nowWeather)
     return (
         <>
             <WeatherContect.Provider value={{ setNewCity, nowWeather, setDelet, isModal, setModal, isLogin, setLogin, dayWeather, weekWeather, dayStatistic, setDayStatistic, weekStatistic, setWeekStatistic }}>
