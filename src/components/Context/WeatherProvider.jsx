@@ -3,17 +3,19 @@ import { WeatherContect } from "./WeatherContext";
 import axios from 'axios'
 
 export default function WeatherProvider({ children }) {
-    const [newCity, setNewCity] = useState('Kyiv')
-    const [nowWeather, setNowWeather] = useState([])
-    const [dayWeather, setDayWeather] = useState([])
-    const [weekWeather, setWeekWeather] = useState([])
+    const [newCity, setNewCity] = useState('')
+    const [nowWeather, setNowWeather] = useState(() => JSON.parse(localStorage.getItem('nowWeather')) || [])
+    const [dayWeather, setDayWeather] = useState(() => JSON.parse(localStorage.getItem('dayWeather')) || [])
+    const [weekWeather, setWeekWeather] = useState(() => JSON.parse(localStorage.getItem('weekWeather')) || [])
     const [onDelet, setDelet] = useState()
     const [isModal, setModal] = useState(false)
-    const [newStatistic, setStatistic] = useState()
     const [isLogin, setLogin] = useState('')
     const [coord, setCoord] = useState()
+    const [dayStatistic, setDayStatistic] = useState()
+    const [weekStatistic, setWeekStatistic] = useState()
 
     useEffect(() => {
+        if (!newCity) return
         const cityCoord = async () => {
             const res = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${newCity}&appid=39bf8d1910af44d76bee8dca04104c5f&units=metric`)
 
@@ -25,7 +27,7 @@ export default function WeatherProvider({ children }) {
     useEffect(() => {
         const allWeather = async () => {
             if (!coord) return
-            const weatherNow = await axios.get(`https://api.open-meteo.com/v1/forecast?latitude=${coord.lat}&longitude=${coord.lon}&current=temperature_2m,relative_humidity_2m,apparent_temperature,surface_pressure,wind_speed_10m,visibility,weather_code&wind_speed_unit=ms`)
+            const weatherNow = await axios.get(`https://api.open-meteo.com/v1/forecast?latitude=${coord.lat}&longitude=${coord.lon}&current=temperature_2m,relative_humidity_2m,apparent_temperature,surface_pressure,wind_speed_10m,visibility,weather_code&timezone=auto&wind_speed_unit=ms`)
             const weatherDay = await axios.get(`https://api.open-meteo.com/v1/forecast?latitude=${coord.lat}&longitude=${coord.lon}&daily=temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,precipitation_probability_max,wind_speed_10m_max&timezone=auto&forecast_days=1`)
             const weatherWeek = await axios.get(`https://api.open-meteo.com/v1/forecast?latitude=${coord.lat}&longitude=${coord.lon}&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max,wind_speed_10m_max,weather_code&timezone=auto`)
 
@@ -37,6 +39,7 @@ export default function WeatherProvider({ children }) {
     }, [coord])
 
     useEffect(() => {
+        if (!onDelet) return
         if(nowWeather) {
         const newNowWeatherList = nowWeather.filter(e => e.name != onDelet)
         const newDayWeatherList = dayWeather.filter(e => e.name != onDelet)
@@ -53,11 +56,16 @@ export default function WeatherProvider({ children }) {
         setLogin(getInfoUser)
     }, [])
 
-    console.log(weekWeather[0])
+    useEffect(() => {
+        localStorage.setItem('nowWeather', JSON.stringify(nowWeather))
+        localStorage.setItem('dayWeather', JSON.stringify(dayWeather))
+        localStorage.setItem('weekWeather', JSON.stringify(weekWeather))
+    }, [nowWeather, dayWeather, weekWeather])
 
+    console.log(nowWeather)
     return (
         <>
-            <WeatherContect.Provider value={{ setNewCity, nowWeather, setDelet, isModal, setModal, newStatistic, setStatistic, isLogin, setLogin, dayWeather, weekWeather }}>
+            <WeatherContect.Provider value={{ setNewCity, nowWeather, setDelet, isModal, setModal, isLogin, setLogin, dayWeather, weekWeather, dayStatistic, setDayStatistic, weekStatistic, setWeekStatistic }}>
                 {children}
             </WeatherContect.Provider>
         </>

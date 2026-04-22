@@ -11,7 +11,7 @@ export default function Footer() {
                 <img className={ft.logo} src={logo} alt="" />
 
                 <div className={ft.addressBlock}>
-                    <p className={ft.title}>Address</p>
+                    <p className={ft.title}>Address:</p>
                     <p className={ft.text}>
                         Svobody str. 35
                         Kyiv

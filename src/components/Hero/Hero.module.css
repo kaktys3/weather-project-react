@@ -2,50 +2,66 @@
     background-image: url(/src/img/Hero.png);
     background-repeat: no-repeat;
     background-size: 100% 100%;
-    height: 100vh;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 80px;
+    gap: 6.3vw;
     justify-content: center;
+    padding: 100px 0px;
+}
+
+.contentNotAdaptic {
+    display: flex;
+    justify-content: center;
+    gap: 52px;
 }
 
 .text-weather-personal,
 .text-data {
     font-weight: 500;
-    font-size: 24px;
+    font-size: clamp(0.63rem, calc(0.311rem + 1.321vw), 1.50rem);
     color: #fff;
-    width: 300px;
+    max-width: 25vw;
     text-align: end;
 }
 
 .text-data {
-    width: 164px;
+    width: 17vw;
     text-align: start;
 }
 
 .title {
     font-weight: 600;
-    font-size: 40px;
+    font-size: clamp(0.88rem, calc(0.292rem + 2.453vw), 2.50rem);
     color: #fff;
 }
 
 .content-box {
     display: flex;
     justify-content: center;
-    gap: 52px;
+    gap: 25px;
 }
 
 .search-button {
-    padding: 10px;
+    width: 3.2vw;
+    height: 3.3vw;
     border-radius: 0px 10px 10px 0px;
     background-color: #FFB36C;
     border: 0px;
 }
 
+.searchImg {
+    width: 1.5vw;
+}
+
+.line {
+    height: clamp(5.00rem, calc(3.566rem + 6.038vw), 9.00rem);
+}
+
 .serch-input {
-    height: 45px;
-    width: 580px;
+    height: 3vw;
+    width: 39vw;
     border-right: 3px solid black;
     border-radius: 10px 0px 0px 10px;
 }
@@ -53,11 +69,44 @@
 .serch-input::placeholder {
     padding: 0px 0px 0px 29px;
     font-weight: 500;
-    font-size: 14px;
+    font-size: clamp(0.38rem, calc(0.196rem + 0.755vw), 0.88rem);
     color: #878787;
 }
 
 .search-box {
     display: flex;
     align-items: center;
+}
+
+.line2,
+.contentAdaptic {
+    display: none;
+}
+
+@media (max-width: 565px) {
+    .line2 {
+        display: block;
+        height: clamp(5.00rem, calc(3.566rem + 6.038vw), 9.00rem);
+    }
+
+    .contentAdaptic {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .contentNotAdaptic {
+        display: none;
+    }
+
+    .text-weather-personal {
+        max-width: 200px;
+        text-align: start;
+    }
+}
+
+@media (max-width: 420px) {
+    .text-data{
+        width: auto;
+    }
 }

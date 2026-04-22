@@ -21,19 +21,19 @@
     width: 100%;
 }
 
-p {
+.time {
     font-weight: 500;
-    font-size: 14px;
-}
-
-h3 {
-    font-weight: 500;
-    font-size: 24px;
+    font-size: clamp(1.25rem, calc(0.906rem + 0.660vw), 1.50rem);
     padding: 15px 0px 10px;
 }
 
 .data {
     padding: 15px 0px 22px;
+}
+
+.text, .data {
+    font-weight: 500;
+    font-size: clamp(0.75rem, calc(0.578rem + 0.330vw), 0.88rem);
 }
 
 .statistick-consol-box {
@@ -45,16 +45,16 @@ h3 {
 .week-weather,
 .statistick {
     font-weight: 500;
-    font-size: 10px;
+    font-size: clamp(0.56rem, calc(0.476rem + 0.165vw), 0.63rem);
     padding: 8px 18px;
     border-radius: 10px;
     background: #ffb36c;
     border: 0px;
 }
 
-h2 {
+.temperatureText {
     font-weight: 500;
-    font-size: 32px;
+    font-size: clamp(1.50rem, calc(0.812rem + 1.320vw), 2.00rem);
     padding: 15px 0px 39px;
 }
 

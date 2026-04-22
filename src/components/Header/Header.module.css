@@ -3,13 +3,19 @@
     align-items: center;
     justify-content: space-between;
     padding: 12px 150px;
+    gap: 111px;
 }
 
-.header-box {
+.menu {
+    display: none;
+}
+
+.headerBox {
     display: flex;
-    width: 455px;
+    width: stretch;
     justify-content: space-between;
     align-items: center;
+    gap: 57px;
 }
 
 .link {
@@ -38,4 +44,69 @@
     display: flex;
     align-items: center;
     gap: 27px;
+}
+
+@media (max-width: 1200px) {
+    .link {
+        font-size: 10px;
+    }
+
+    .logo {
+        width: 54px;
+        height: 36px;
+    }
+
+    .header {
+        gap: 57px;
+        padding: 12px 100px;
+    }
+
+    .login {
+        font-size: 10px;
+        padding: 8px 16px;
+        width: 73px;
+        height: 28px;
+    }
+
+    .user-img {
+        width: 40px;
+    }
+}
+
+@media (max-width:  800px) {
+    .menu {
+        display: flex;
+        gap: 3px;
+        background-color: rgba(0,0,0,0);
+        border: 0px;
+        align-items: center;
+    }
+
+    .header-link-box {
+        flex-direction: column;
+        gap: 25px;
+    }
+
+    .user-box {
+        flex-direction: column-reverse;
+        gap: 15px;
+    }
+
+    .headerBox {
+        position: absolute;
+        padding: 30px 50px;
+        background: #e6e6e6;
+        top: 109px;
+        left: 50%;
+        transform: translate(-50%, -50px);
+        width: calc(100vw - 99px);
+    }
+
+    .isHiden {
+        display: flex;
+    }
+
+    .notHiden {
+        display: none;
+    }
 }

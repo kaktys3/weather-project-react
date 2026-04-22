@@ -30,7 +30,7 @@ const WeekPartWeather = ({ min, day, max, weatherStatus}) => {
 }
 
 export default function WeekStatistik() {
-    const { weekWeather, newStatistic } = useContext(WeatherContect)
+    const { weekWeather, weekStatistic } = useContext(WeatherContect)
     const weatherInterpretation = {
         0: { label: "Sunny", icon: "☀️" },
         1: { label: "Mainly Clear", icon: "🌤️" },
@@ -48,14 +48,13 @@ export default function WeekStatistik() {
         80: { label: "Rain Showers", icon: "🌦️" },
         95: { label: "Thunderstorm", icon: "⛈️" }
     };
-    const cityWeek = weekWeather.filter(e => e.name === newStatistic)
-
+    const cityWeek = weekWeather.filter(e => e.name === weekStatistic)
 
     return (
         <>
             <section className={we.weekSection}>
+                <h5 className={we.weekTitle}>7-day forecast</h5>
                 <div>
-                    <h5 className={we.weekTitle}>7-day forecast</h5>
                     {cityWeek.length && cityWeek[0].daily.temperature_2m_min.map((weather, index) => {
                         const info = getFormattedDate(weekWeather[0].daily.time[index]);
                         const code = weekWeather[0].daily.weather_code[index];

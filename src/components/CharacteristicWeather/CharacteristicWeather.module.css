@@ -1,11 +1,17 @@
-p {
+.text {
     font-weight: 500;
-    font-size: 16px;
+    font-size: clamp(0.63rem, calc(0.484rem + 0.573vw), 1.00rem);
 }
 
-h3 {
+.title,
+.titleMaxTemperatura {
     font-weight: 500;
-    font-size: 32px;
+    font-size: clamp(0.88rem, calc(0.453rem + 1.719vw), 2.00rem);
+    padding: 10px 0px 20px;
+}
+
+.titleMaxTemperatura {
+    padding: 10px 0px 0px;
 }
 
 .sectionWeatherCharacteristic>div {
@@ -14,9 +20,13 @@ h3 {
     align-items: center;
     justify-content: center;
     border-radius: 10px;
-    width: 290px;
-    height: 217px;
+    width: 20.4vw;
+    padding: 20px 0px;
     background: #d9d9d9;
+}
+
+.sectionWeatherCharacteristic>div>img {
+    width: 6vw;
 }
 
 .sectionWeatherCharacteristic {
@@ -25,8 +35,33 @@ h3 {
     align-items: center;
     flex-wrap: wrap;
     border-radius: 20px;
-    width: 1140px;
-    height: 554px;
+    width: 76.3vw;
+    padding: 40px 20px;
+    row-gap: 2.8vw;
     background: #e8e8e8;
-    column-gap: 58px;
+    column-gap: 4vw;
+}
+
+@media (max-width: 600px) {
+    .sectionWeatherCharacteristic {
+        flex-direction: column;
+    }
+
+    .sectionWeatherCharacteristic>div {
+        width: 60vw;
+    }
+
+    .sectionWeatherCharacteristic>div>img {
+        width: 6vw;
+        width: 15.3vw;
+    }
+
+    .title,
+    .titleMaxTemperatura {
+        font-size: 5vw;
+    }
+
+    .text {
+            font-size: 3vw;
+    }
 }

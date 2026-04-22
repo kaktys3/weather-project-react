@@ -12,20 +12,20 @@ import WeekStatistik from './components/WeekStatistik/WeekStatistik.jsx'
 import Slider from './components/Slider/Slider.jsx'
 
 function App() {
-  const { dayWeather, newStatistic } = useContext(WeatherContect)
+  const { dayWeather, dayStatistic, weekStatistic,} = useContext(WeatherContect)
   return (
     <>
       <Header />
       <Hero />
       <main>
         <Weather />
-        {newStatistic && <CharacteristicWeather weather={dayWeather.filter(e => e.name === newStatistic)} />}
-        {newStatistic && <WeekStatistik />}
+        {dayStatistic && <CharacteristicWeather weather={dayWeather.filter(e => e.name === dayStatistic)} />}
+        {weekStatistic && <WeekStatistik />}
         <News />
+        <Slider/>
       </main>
       <Footer />
       <SignUp />
-      <Slider/>
     </>
   )
 }

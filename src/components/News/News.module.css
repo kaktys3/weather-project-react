@@ -4,7 +4,7 @@
 }
 
 .card {
-    width: 270px;
+    width: 18.7vw;
 }
 
 .section>div {
@@ -16,6 +16,10 @@
 .section {
     display: flex;
     justify-content: center;
+}
+
+.image {
+    width: 18.7vw;
 }
 
 .button {
@@ -32,4 +36,14 @@
 .title {
     font-weight: 500;
     font-size: 20px;
+}
+
+.text {
+    font-size: clamp(0.88rem, calc(0.828rem + 0.191vw), 1.00rem);
+}
+
+@media (max-width: 834px) {
+    .section {
+        display: none;
+    }
 }

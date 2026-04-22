@@ -1,10 +1,11 @@
 .dayDate,
-.dayTemp {
+.dayTemp,
+.dayStatus {
     font-weight: 500;
-    font-size: 16px;
+    font-size: clamp(0.63rem, calc(0.484rem + 0.573vw), 1.00rem);
 }
 
-.weekSection > div {
+.weekSection>div {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -12,15 +13,19 @@
 
 .weekSection {
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2vw;
     justify-content: center;
     background: #e8e8e8;
-    width: 1140px;
+    width: 79vw;
     padding: 26px 0px 42px;
     border-radius: 20px;
 }
 
 .weekTitle {
     padding: 0px 0px 10px;
+    font-size: clamp(0.63rem, calc(0.484rem + 0.573vw), 1.00rem);
 }
 
 .dayCard {
@@ -28,18 +33,35 @@
     align-items: center;
     justify-content: space-between;
     border-radius: 10px;
-    width: 886px;
-    padding: 0px 50px;
+    width: 61.5vw;
+    padding: 0px 3.5vw;
     height: 47px;
     background: #d9d9d9;
-}
-
-.dayStatus {
-    font-weight: 500;
-    font-size: 16px;
 }
 
 .dayInfo {
     display: flex;
     align-items: center;
+}
+
+@media (max-width: 600px) {
+    .dayCard {
+        flex-direction: column;
+        height: max-content;
+        gap: 5.1vw;
+        padding: 10px 0px 22px;
+        width: 25.3vw;
+    }
+
+
+    .weekSection>div {
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .dayInfo {
+        flex-direction: column;
+        gap: 1.8vw;
+    }
 }

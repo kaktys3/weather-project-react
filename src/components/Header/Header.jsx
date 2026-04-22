@@ -1,11 +1,13 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 import { WeatherContect } from '../Context/WeatherContext.jsx'
 import had from './Header.module.css'
 import logo from '/src/img/logo.png'
 import user from '/src/img/user.png'
+import menu from '/src/img/menu.png'
 
 export default function Header() {
-    const { setModal, isLogin, setLogin  } = useContext(WeatherContect)
+    const { setModal, isLogin, setLogin } = useContext(WeatherContect)
+    const [isHiden, setHiden] = useState(false)
     const hundelLogout = () => {
         localStorage.removeItem('user')
         setLogin('')
@@ -14,18 +16,19 @@ export default function Header() {
     return (
         <>
             <header className={had.header}>
-                <div className={had['header-box']}>
-                    <img className={had.logo} src={logo} alt="" />
+                <img className={had.logo} src={logo} alt="" />
+                <button className={had.menu} onClick={() => setHiden(!isHiden)}>Menu <span><img src={menu} alt="" style={isHiden ? {transform: 'rotate(-90deg)'}: {}} /></span></button>
+                <div className={`${had.headerBox} ${isHiden ? had.isHiden : had.notHiden}`}>
                     <div className={had['header-link-box']}>
                         <a className={had.link} href="">Who we are</a>
                         <a className={had.link} href="">Contacts</a>
                         <a className={had.link} href="">Menu</a>
                     </div>
-                </div>
-                <div className={had['user-box']}>
-                    {isLogin && <button onClick={() => hundelLogout()} className={had.login}>Log out</button>}
-                    <button onClick={() => setModal(true)} className={had.login}>{isLogin ? isLogin.name : 'Sign Up'}</button>
-                    <img className={had['user-img']} src={user} alt="" />
+                    <div className={had['user-box']}>
+                        {isLogin && <button onClick={() => hundelLogout()} className={had.login}>Log out</button>}
+                        <button onClick={() => setModal(true)} className={had.login}>{isLogin ? isLogin.name : 'Sign Up'}</button>
+                        <img className={had['user-img']} src={user} alt="" />
+                    </div>
                 </div>
             </header>
         </>
