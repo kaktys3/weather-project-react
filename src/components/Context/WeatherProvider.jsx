@@ -10,33 +10,27 @@ export default function WeatherProvider({ children }) {
     const [onDelet, setDelet] = useState()
     const [isModal, setModal] = useState(false)
     const [isLogin, setLogin] = useState('')
-    const [coord, setCoord] = useState()
     const [dayStatistic, setDayStatistic] = useState()
     const [weekStatistic, setWeekStatistic] = useState()
 
     useEffect(() => {
-        if (!newCity) return
-        const cityCoord = async () => {
-            const res = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${newCity}&appid=39bf8d1910af44d76bee8dca04104c5f&units=metric`)
-
-            setCoord({...res.data.coord , name: res.data.name, country: res.data.sys.country})
-        }
-        cityCoord()
-    }, [newCity])
-
-    useEffect(() => {
         const allWeather = async () => {
-            if (!coord) return
-            const weatherNow = await axios.get(`https://api.open-meteo.com/v1/forecast?latitude=${coord.lat}&longitude=${coord.lon}&current=temperature_2m,relative_humidity_2m,apparent_temperature,surface_pressure,wind_speed_10m,visibility,weather_code&timezone=auto&wind_speed_unit=ms`)
-            const weatherDay = await axios.get(`https://api.open-meteo.com/v1/forecast?latitude=${coord.lat}&longitude=${coord.lon}&daily=temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,precipitation_probability_max,wind_speed_10m_max&timezone=auto&forecast_days=1`)
-            const weatherWeek = await axios.get(`https://api.open-meteo.com/v1/forecast?latitude=${coord.lat}&longitude=${coord.lon}&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max,wind_speed_10m_max,weather_code&timezone=auto`)
+            if (!newCity) return
+            const res = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${newCity}&appid=39bf8d1910af44d76bee8dca04104c5f&units=metric`)
+            const  newCoord = {...res.data.coord , name: res.data.name, country: res.data.sys.country}
 
-            setNowWeather([...nowWeather, {...weatherNow.data, ...coord}])
-            setDayWeather([...dayWeather, {...weatherDay.data, ...coord}])
-            setWeekWeather([...weekWeather,{...weatherWeek.data, ...coord}])
+            const [now, day, week] = await Promise.all([
+                    axios.get(`https://api.open-meteo.com/v1/forecast?latitude=${newCoord.lat}&longitude=${newCoord.lon}&current=temperature_2m,relative_humidity_2m,apparent_temperature,surface_pressure,wind_speed_10m,visibility,weather_code&timezone=auto&wind_speed_unit=ms`),
+                    axios.get(`https://api.open-meteo.com/v1/forecast?latitude=${newCoord.lat}&longitude=${newCoord.lon}&daily=temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,precipitation_probability_max,wind_speed_10m_max&timezone=auto&forecast_days=1`),
+                    axios.get(`https://api.open-meteo.com/v1/forecast?latitude=${newCoord.lat}&longitude=${newCoord.lon}&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max,wind_speed_10m_max,weather_code&timezone=auto`)
+                ]);
+                
+            setNowWeather([...nowWeather, {...now.data, ...newCoord}])
+            setDayWeather([...dayWeather, {...day.data, ...newCoord}])
+            setWeekWeather([...weekWeather,{...week.data, ...newCoord}])
         }
         allWeather()
-    }, [coord])
+    }, [newCity])
 
     useEffect(() => {
         if (!onDelet) return
@@ -62,6 +56,7 @@ export default function WeatherProvider({ children }) {
         localStorage.setItem('weekWeather', JSON.stringify(weekWeather))
     }, [nowWeather, dayWeather, weekWeather])
 
+    console.log(dayWeather)
     return (
         <>
             <WeatherContect.Provider value={{ setNewCity, nowWeather, setDelet, isModal, setModal, isLogin, setLogin, dayWeather, weekWeather, dayStatistic, setDayStatistic, weekStatistic, setWeekStatistic }}>

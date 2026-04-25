@@ -1,38 +1,43 @@
 import news from './News.module.css'
-import dogTwo from '/src/img/Dog-two.png'
-import dog from '/src/img/Dog.png'
-import cat from '/src/img/Cat.png'
-import catTwo from '/src/img/Cat-two.png'
+import { useContext, useEffect, useState } from 'react'
+import axios from 'axios'
+import { WeatherContect } from '../Context/WeatherContext'
+
+const NewsInfo = ({ info }) => {
+
+    return (
+        <>
+            <div className={news.card}>
+                <img className={news.image} src={info.image} alt="" />
+                <p className={news.text}>{info.title}</p>
+            </div>
+        </>
+    )
+}
 
 export default function News() {
+    const { dayStatistic} = useContext(WeatherContect)
+    const [newsApiData, setNewsApiData] = useState()
+
+    useEffect(() => {
+        const newsApi = async () => {
+            const url = await axios.get(`https://api.currentsapi.services/v1/search?keywords=${dayStatistic ? dayStatistic : 'Kyiv'}&language=en&page_size=4&apiKey=uL8XYE8Lu7-Wv4mUsDz6IcP4tqL7IkbGnIRWdcl8tySb26uv`)
+            setNewsApiData(url.data.news)
+        }
+
+        newsApi()
+    }, [dayStatistic])
+
     return (
         <>
             <section className={news.section}>
                 <div>
                     <h5 className={news.title}>Interacting with our pets</h5>
-
                     <div className={news.container}>
-                        <div className={news.card}>
-                            <img className={news.image} src={cat} alt="" />
-                            <p className={news.text}>Rescue pups pose as ghosts in festive photo shoot</p>
-                        </div>
-
-                        <div className={news.card}>
-                            <img className={news.image} src={catTwo} alt="" />
-                            <p className={news.text}>Cat interrupts morning coffee on sunny Washington morning</p>
-                        </div>
-
-                        <div className={news.card}>
-                            <img className={news.image} src={dog} alt="" />
-                            <p className={news.text}>New study finds dogs pay more attention to women</p>
-                        </div>
-
-                        <div className={news.card}>
-                            <img className={news.image} src={dogTwo} alt="" />
-                            <p className={news.text}>Petting dogs gives health benefit, even if they are not yours</p>
-                        </div>
+                        {newsApiData && newsApiData.map((data) => (
+                            <NewsInfo info={data} key={data.id}/>
+                        ))}
                     </div>
-
                     <button className={news.button}>See more</button>
                 </div>
             </section>

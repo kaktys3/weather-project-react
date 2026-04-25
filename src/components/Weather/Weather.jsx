@@ -63,18 +63,18 @@ export default function Weather() {
     const { nowWeather, dayWeather } = useContext(WeatherContect)
     const days = ["Неділя", "Понеділок", "Вівторок", "Середа", "Четвер", "П'ятниця", "Субота"];
 
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setTime(new Date())
+        }, 60000)
+
+        return () => clearInterval(timer)
+    }, [])
 
     return (
         <>
             <section className={wh.weather}>
                 {nowWeather && nowWeather.map((weather, index) => {
-                    useEffect(() => {
-                        const timer = setInterval(() => {
-                            setTime(new Date())
-                        }, 60000)
-
-                        return () => clearInterval(timer)
-                    }, [])
                     const dt = DateTime.now().setZone(`${dayWeather[index].timezone}`)
 
                     return (<WeatherCard

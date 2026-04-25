@@ -16,7 +16,7 @@ export const getFormattedDate = (dateString) => {
 
 
 const WeekPartWeather = ({ min, day, max, weatherStatus}) => {
-    console.log(weatherStatus)
+
     return (
         <div className={we.dayCard}>
             <h4 className={we.dayDate}>{day}</h4>

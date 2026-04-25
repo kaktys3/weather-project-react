@@ -1,0 +1,11 @@
+.chartBox {
+    padding: 20px;
+    width: 80vw;
+    height: 30vw;
+}
+
+@media (max-width: 600px) {
+    .chartBox {
+    height: 200px;
+}
+}
