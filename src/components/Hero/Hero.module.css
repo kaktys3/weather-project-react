@@ -49,6 +49,8 @@
     border-radius: 0px 10px 10px 0px;
     background-color: #FFB36C;
     border: 0px;
+    min-height: 33px;
+    min-width: 30px;
 }
 
 .searchImg {
@@ -60,10 +62,12 @@
 }
 
 .serch-input {
-    height: 3vw;
+    height: 3.2vw;
     width: 39vw;
+    padding: 0px 0px 0px 15px;
     border-right: 3px solid black;
     border-radius: 10px 0px 0px 10px;
+    min-height: 33px;
 }
 
 .serch-input::placeholder {
@@ -106,7 +110,7 @@
 }
 
 @media (max-width: 420px) {
-    .text-data{
+    .text-data {
         width: auto;
     }
 }

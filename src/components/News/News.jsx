@@ -32,7 +32,7 @@ export default function News() {
         <>
             <section className={news.section}>
                 <div>
-                    <h5 className={news.title}>Interacting with our pets</h5>
+                    <h5 className={news.title}>The news</h5>
                     <div className={news.container}>
                         {newsApiData && newsApiData.map((data) => (
                             <NewsInfo info={data} key={data.id}/>
