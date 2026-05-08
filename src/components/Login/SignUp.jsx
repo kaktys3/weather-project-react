@@ -23,7 +23,6 @@ export default function SignUp() {
 
     const loginPageFn = (e) => {
         e.preventDefault()
-
         setLoginPage(!loginPage)
     }
 

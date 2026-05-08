@@ -35,19 +35,15 @@ export default function WeatherProvider({ children }) {
     useEffect(() => {
         if (!onDelet) return
         if(nowWeather) {
-        const newNowWeatherList = nowWeather.filter(e => e.name != onDelet)
-        const newDayWeatherList = dayWeather.filter(e => e.name != onDelet)
-        const newWeekWeatherList = weekWeather.filter(e => e.name != onDelet)
 
-        setNowWeather(newNowWeatherList)
-        setDayWeather(newDayWeatherList)
-        setWeekWeather(newWeekWeatherList)
+        setNowWeather(nowWeather.filter(e => e.name != onDelet))
+        setDayWeather(dayWeather.filter(e => e.name != onDelet))
+        setWeekWeather(weekWeather.filter(e => e.name != onDelet))
         }
     }, [onDelet])
 
     useEffect(() => {
-        const getInfoUser = JSON.parse(localStorage.getItem('user'))
-        setLogin(getInfoUser)
+        setLogin(JSON.parse(localStorage.getItem('user')))
     }, [])
 
     useEffect(() => {

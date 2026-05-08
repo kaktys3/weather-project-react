@@ -18,8 +18,8 @@ function App() {
     <>
       <Header />
       <Hero />
-      <main>
-        <Weather />
+      <main className={!dayWeather.length && 'notMain'}>
+        {dayWeather.length != 0 && <Weather />}
         {dayStatistic && <CharacteristicWeather weather={dayWeather.filter(e => e.name === dayStatistic)} />}
         {weekStatistic && <WeekStatistik />}
         {dayStatistic && <WeatherChart/>}

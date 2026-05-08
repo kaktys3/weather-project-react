@@ -71,9 +71,9 @@
 }
 
 .serch-input::placeholder {
-    padding: 0px 0px 0px 29px;
+    padding: 0px 0px 0px 2vw;
     font-weight: 500;
-    font-size: clamp(0.38rem, calc(0.196rem + 0.755vw), 0.88rem);
+   font-size: clamp(0.63rem, calc(0.057rem + 0.909vw), 0.88rem);
     color: #878787;
 }
 

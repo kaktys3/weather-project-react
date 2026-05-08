@@ -2,7 +2,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 12px 150px;
+    padding: 12px 6vw;
     gap: 111px;
 }
 
@@ -22,14 +22,14 @@
     text-decoration: none;
     color: #000;
     font-weight: 500;
-    font-size: 12px;
+    font-size: clamp(0.63rem, calc(0.000rem + 0.833vw), 0.75rem);
 }
 
 .login {
     border-radius: 10px;
     padding: 10px 20px;
     font-weight: 600;
-    font-size: 12px;
+    font-size: clamp(0.63rem, calc(0.000rem + 0.833vw), 0.75rem);
     color: #000;
     border: 0px;
     background-color: #FFB36C;
@@ -46,23 +46,18 @@
     gap: 27px;
 }
 
+.logo {
+    width: 5.7vw;
+    min-width: 54px;
+    min-height: 36px;
+}
+
 @media (max-width: 1200px) {
-    .link {
-        font-size: 10px;
-    }
-
-    .logo {
-        width: 54px;
-        height: 36px;
-    }
-
     .header {
         gap: 57px;
-        padding: 12px 100px;
     }
 
     .login {
-        font-size: 10px;
         padding: 8px 16px;
         width: 73px;
         height: 28px;
@@ -73,11 +68,11 @@
     }
 }
 
-@media (max-width:  800px) {
+@media (max-width: 800px) {
     .menu {
         display: flex;
         gap: 3px;
-        background-color: rgba(0,0,0,0);
+        background-color: rgba(0, 0, 0, 0);
         border: 0px;
         align-items: center;
     }
